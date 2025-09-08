@@ -1,13 +1,9 @@
 {% macro eliminate_duplicates(column_list) %}
     row_number() over (
         partition by
-            {%- for col in column_list -%}
-                {{ col }}{% if not loop.last %}, {% endif %}
-            {%- endfor -%}
+            {{ column_list | join(', ') }}
         order by
-            {%- for col in column_list -%}
-                {{ col }}{% if not loop.last %}, {% endif %}
-            {%- endfor -%}
+            {{ column_list | join(', ') }}
     )
 {% endmacro %}
 

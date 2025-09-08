@@ -50,6 +50,19 @@ models:
             +materialized: table
           best_show_by_year_netflix:
             +materialized: table
+      marts:
+      +database: "{{ env_var('DBT_DB') }}_GOLD_DB_DV"
+      +schema: "{{ env_var('DBT_SCHEMA_NAME','default_schema') }}"
+      dim_country:
+        +materialized: table
+      dim_date:
+        +materialized: table
+      dim_genre:
+        +materialized: table
+      dim_movie_show:
+        +materialized: table
+      fct_netflix_views:
+        +materialized: table
 
 tests:
       +severity: warn  

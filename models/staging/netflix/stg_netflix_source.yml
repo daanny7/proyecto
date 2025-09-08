@@ -31,21 +31,33 @@ sources:
               description: "Título de la película."
               tests:
                 - not_null
-
+                - unique
             - name: release_year
               description: "Año de lanzamiento."
-
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 1990
+                    max_value: 2030
             - name: score
               description: "Puntuación de la película."
-
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 0
+                    max_value: 10
             - name: number_of_votes
               description: "Número de votos."
-
+              tests:
+               - dbt_utils.accepted_range:
+                  min_value: 0
             - name: duration
               description: "Duración de la película."
+              tests:
+                - not_null
 
             - name: main_genre
               description: "Género de la película."
+              tests:
+                - not_null
 
             - name: main_production
               description: "País de producción."
@@ -68,15 +80,28 @@ sources:
 
             - name: release_year
               description: "Año de lanzamiento."
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 1990
+                    max_value: 2030
 
             - name: score
               description: "Puntuación de la película."
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 0
+                    max_value: 10
 
             - name: main_genre
               description: "Género principal."
+              tests:
+                - unique
+                - not_null
 
             - name: main_production
               description: "País de producción."
+              tests:
+                - not_null
 
         - name: best_shows_netflix
           description: "Información sobre las mejores series."
@@ -96,27 +121,45 @@ sources:
               description: "Título de la serie."
               tests:
                 - not_null
+                - unique
 
             - name: release_year
               description: "Año de lanzamiento."
-
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 1990
+                    max_value: 2030
+    
             - name: score
               description: "Puntuación de la serie."
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 0
+                    max_value: 10
 
             - name: number_of_votes
               description: "Número de votos."
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 0
+                    max_value: 10
 
             - name: duration
               description: "Duración en minutos."
-
+              
             - name: number_of_seasons
               description: "Número de temporadas."
-
+              
             - name: main_genre
               description: "Género principal."
+              tests:
+                - not_null
 
             - name: main_production
               description: "País de producción."
+              tests:
+                - not_null
+                
 
         - name: best_show_by_year_netflix
           description: "Mejores series por año en Netflix."
@@ -134,18 +177,30 @@ sources:
               description: "Título de la serie."
               tests:
                 - not_null
+                - unique
 
             - name: release_year
               description: "Año de lanzamiento."
-
+              tests:
+                - not_null
+            
             - name: score
               description: "Puntuación de la serie."
+              tests:
+                - dbt_utils.accepted_range:
+                    min_value: 0
+                    max_value: 10
 
             - name: number_of_seasons
               description: "Número de temporadas."
 
             - name: main_genre
               description: "Género principal."
+              tests:
+                - not_null 
 
             - name: main_production
               description: "País de producción."
+              tests:
+                - not_null
+          

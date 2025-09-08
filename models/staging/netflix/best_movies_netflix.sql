@@ -17,8 +17,7 @@ renamed as (
         cast(main_production as text) as countryprod_movie,
         'movie' as content_type
     from source
-    where {{ round_score('score') }} >= 6.9
-      and cast(number_of_votes as int) >= 10000
+    where cast(number_of_votes as int) >= 200
 )
 
 select *

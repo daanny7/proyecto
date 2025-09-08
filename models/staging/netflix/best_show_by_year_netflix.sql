@@ -10,10 +10,10 @@ renamed as (
         trim(title) as series_title,
         cast(release_year as int) as release_year,
         {{ round_score('score') }} as imdb_score,
-        {{ calculate_md5('main_genre') }} as movie_genre_id,
-        cast(main_genre as text) as movie_genre,
-        {{ calculate_md5('main_production') }} as countryprod_movie_id,
-        cast(main_production as text) as countryprod_movie,
+        {{ calculate_md5('main_genre') }} as show_genre_id,
+        cast(main_genre as text) as show_genre,
+        {{ calculate_md5('main_production') }} as countryprod_show_id,
+        cast(main_production as text) as countryprod_show,
         row_number() over (
             partition by release_year
             order by score desc
