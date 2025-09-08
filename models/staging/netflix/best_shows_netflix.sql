@@ -5,15 +5,21 @@ with source as (
 
 renamed as (
     select
-        series_id,
+        {{ eliminate_duplicates(['title', 'release_year', 'score']) }} as _row,
+        title,
         trim(title) as series_title,
         cast(release_year as int) as release_year,
-        cast(imdb_score as float) as imdb_score,
-        cast(vote_count as int) as vote_count,
+        {{ round_score('score') }} as imdb_score,
+        cast(duration as int) as duration_movie,
+        {{ calculate_md5('main_genre') }} as movie_genre_id,
+        cast(main_genre as text) as movie_genre,
+        {{ calculate_md5('main_production') }} as countryprod_movie_id,
+        cast(main_production as text) as countryprod_movie,
         'series' as content_type
     from source
-    where imdb_score >= 7.5
-      and vote_count >= 10000
+    where {{ round_score('score') }} >= 7.5
 )
 
-select * from renamed
+select *
+from renamed
+where _row = 1

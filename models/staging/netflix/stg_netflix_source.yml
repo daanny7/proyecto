@@ -4,9 +4,148 @@ sources:
   - name: netflix
     database: DEV_BRONZE_DB_DV
     schema: netflix
-    tables:
-      - name: best_movies_netflix
-      - name: best_movie_by_year_netflix
-      - name: best_shows_netflix
-      - name: best_show_by_year_netflix
 
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: { count: 1000, period: hour }
+      error_after: { count: 2000, period: hour }
+    tables:
+        - name: best_movies_netflix
+          description: "Información sobre las mejores películas."
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                combination_of_columns:
+                  - title
+                  - release_year
+                  - score
+                  - number_of_votes
+                  - duration
+                  - main_genre
+                  - main_production
+          columns:
+            - name: title
+              description: "Título de la película."
+              tests:
+                - not_null
+
+            - name: release_year
+              description: "Año de lanzamiento."
+
+            - name: score
+              description: "Puntuación de la película."
+
+            - name: number_of_votes
+              description: "Número de votos."
+
+            - name: duration
+              description: "Duración de la película."
+
+            - name: main_genre
+              description: "Género de la película."
+
+            - name: main_production
+              description: "País de producción."
+
+        - name: best_movie_by_year_netflix
+          description: "Mejores películas por año en Netflix."
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                combination_of_columns:
+                  - title
+                  - release_year
+                  - score
+                  - main_genre
+                  - main_production
+          columns:
+            - name: title
+              description: "Título de la película."
+              tests:
+                - not_null
+
+            - name: release_year
+              description: "Año de lanzamiento."
+
+            - name: score
+              description: "Puntuación de la película."
+
+            - name: main_genre
+              description: "Género principal."
+
+            - name: main_production
+              description: "País de producción."
+
+        - name: best_shows_netflix
+          description: "Información sobre las mejores series."
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                combination_of_columns:
+                  - title
+                  - release_year
+                  - score
+                  - number_of_votes
+                  - duration
+                  - number_of_seasons
+                  - main_genre
+                  - main_production
+          columns:
+            - name: title
+              description: "Título de la serie."
+              tests:
+                - not_null
+
+            - name: release_year
+              description: "Año de lanzamiento."
+
+            - name: score
+              description: "Puntuación de la serie."
+
+            - name: number_of_votes
+              description: "Número de votos."
+
+            - name: duration
+              description: "Duración en minutos."
+
+            - name: number_of_seasons
+              description: "Número de temporadas."
+
+            - name: main_genre
+              description: "Género principal."
+
+            - name: main_production
+              description: "País de producción."
+
+        - name: best_show_by_year_netflix
+          description: "Mejores series por año en Netflix."
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                combination_of_columns:
+                  - title
+                  - release_year
+                  - score
+                  - number_of_seasons
+                  - main_genre
+                  - main_production
+          columns:
+            - name: title
+              description: "Título de la serie."
+              tests:
+                - not_null
+
+            - name: release_year
+              description: "Año de lanzamiento."
+
+            - name: score
+              description: "Puntuación de la serie."
+
+            - name: number_of_seasons
+              description: "Número de temporadas."
+
+            - name: main_genre
+              description: "Género principal."
+
+            - name: main_production
+              description: "País de producción."
