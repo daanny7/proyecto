@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: NETFLIX
+    database: DEV_BRONZE_DB_DV
+    schema: NETFLIX
+    tables:
+      - name: BEST_MOVIES_NETFLIX
+      - name: BEST_MOVIE_BY_YEAR_NETFLIX
+      - name: BEST_SHOWS_NETFLIX
+      - name: BEST_SHOW_BY_YEAR_NETFLIX
+
+
