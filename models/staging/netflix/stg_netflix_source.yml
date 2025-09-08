@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: netflix
     database: DEV_BRONZE_DB_DV
-    schema: NETFLIX
+    schema: netflix
     tables:
       - name: best_movies_netflix
       - name: best_movie_by_year_netflix

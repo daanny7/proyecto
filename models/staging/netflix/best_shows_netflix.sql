@@ -1,6 +1,6 @@
 with source as (
     select * 
-    from {{ source('NETFLIX', 'best_shows_netflix') }}
+    from {{ source('netflix', 'best_shows_netflix') }}
 ),
 
 renamed as (
