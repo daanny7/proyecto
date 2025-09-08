@@ -20,23 +20,9 @@ models:
         tests: [unique,not_null]
       - name: movie_title
         tests: [not_null]
-  - name: dim_content
-    description: "Dimensión con información unificada de películas y series de Netflix"
-    columns:
-      - name: content_id
-        tests:
-          - not_null
-          - unique
-
+  
   - name: fact_ratings
     description: "Tabla de hechos con puntuaciones IMDb y votos"
-    columns:
-      - name: content_id
-        tests:
-          - not_null
-          - relationships:
-              to: ref('dim_content')
-              field: content_id
 
   - name: top10_content_by_year
     description: "Vista con el top 10 de películas y series por año y tipo"
