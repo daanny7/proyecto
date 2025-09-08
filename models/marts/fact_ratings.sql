@@ -1,5 +1,5 @@
 select
-    content_id,
+    title,
     release_year,
     imdb_score,
     vote_count,
