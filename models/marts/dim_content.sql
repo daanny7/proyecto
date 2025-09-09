@@ -4,7 +4,9 @@ with movies as (
         release_year,
         imdb_score,
         vote_count,
-        content_type
+        content_type,
+        movie_genre as category,
+        countryprod_movie as country
     from {{ ref('best_movies_netflix') }}
 ),
 
@@ -14,7 +16,9 @@ shows as (
         release_year,
         imdb_score,
         vote_count,
-        content_type
+        content_type,
+        show_genre as category,
+        countryprod_show as country
     from {{ ref('best_shows_netflix') }}
 ),
 
@@ -29,5 +33,7 @@ select
     release_year,
     content_type,
     imdb_score,
-    vote_count
+    vote_count,
+    country
+    
 from unioned
