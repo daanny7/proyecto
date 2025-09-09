@@ -1,24 +1,16 @@
 with movies as (
     select 
         movie_title as title,
-        release_year,
-        imdb_score,
-        vote_count,
         content_type,
-        movie_genre as category,
-        countryprod_movie as country
+        movie_genre as category
     from {{ ref('best_movies_netflix') }}
 ),
 
 shows as (
     select 
         series_title as title,
-        release_year,
-        imdb_score,
-        vote_count,
         content_type,
-        show_genre as category,
-        countryprod_show as country
+        show_genre as category
     from {{ ref('best_shows_netflix') }}
 ),
 
@@ -30,11 +22,9 @@ unioned as (
 
 select 
     title,
-    release_year,
-    content_type,
-    imdb_score,
-    vote_count,
     category,
-    country
-    
+    content_type,
+    count(*) as total
 from unioned
+group by category, content_type, title
+order by total desc

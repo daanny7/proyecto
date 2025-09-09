@@ -24,5 +24,8 @@ models:
   - name: fact_ratings
     description: "Tabla de hechos con puntuaciones IMDb y votos"
 
-  - name: top10_content_by_year
-    description: "Vista con el top 10 de películas y series por año y tipo"
+  - name: tabla_resumen
+    description: "Tabla resumen"
+
+  - name: recuento_por_categoria
+    description: "Recuento por categoria"
